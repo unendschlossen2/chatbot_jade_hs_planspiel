@@ -141,4 +141,4 @@ def rag_chatbot_answer(user_question, collection, model, tokenizer, device, embe
         print(f"Fehler bei der Antwortgenerierung! {e}")
         return "Please try again later. / Bitte versuchen Sie es später erneut."
 
-    return generated_answer, context_text, contexts_reranked
+    return generated_answer, context_text, reranked_documents
