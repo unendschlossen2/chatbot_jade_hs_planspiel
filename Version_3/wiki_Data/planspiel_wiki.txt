@@ -1,0 +1,117 @@
+---
+Abgaben für Kläranlage
+Die Abgaben für die Kläranlage in Periode 7 werden über die Position "Sonstige fixe Kosten" in der Kostenrechnung verbucht.
+---
+Abgaben für Sozialplan
+Die Abfindungen für Fertigungsmitarbeiter werden in der Kostenrechnung unter der Position "Einstellungen und Entlassungen" verbucht.
+
+Die Abfindungen für Mitarbeiter der anderen Abteilungen werden als außerordentliche Aufwendungen gebucht.
+---
+Anzahl Anlagen pro Anlagentyp
+Pro Anlagentyp können im gesamten Spiel maximal 9 Anlagen beschafft werden (Anlagen-Nr. 1 bis 9). Die Desinvestition einer Anlage führt dabei nicht dazu, dass wieder eine weitere Anlage beschafft werden kann (die Nummern der Anlagen werden somit nicht neu vergeben bzw. erweitert!).
+---
+Ausgangslage Aktienkurs und Unternehmenswert (T)P0
+Um das Spiel kontrollierbarer zu gestalten, wurde das Rating ausgeschaltet. Daher stimmen der Aktienkurs und der Unternehmenswert im Spiel nicht mit den Werten aus dem Dokument der Ausgangslage in Moodle überein.
+
+Es gelten daher folgende Werte für (T)P0:
+
+Aktienkurs: 119,2
+Unternehmenswert: 59,6
+---
+Berechnung Anlagevermögen der Umweltanlagen
+
+Periode 0: Wert der Umweltanlagen Beginn P0 0 Mio. € + Investitionen in Umweltanlagen P0 1,50 Mio. € - Abschreibung (über 10 Perioden) 0,15 Mio. € = Wert der Umweltanlagen Ende P0 1,35 Mio. €
+
+Periode 1: Wert der Umweltanlagen Beginn P1 1,35 Mio. € + Investitionen in Umweltanlagen P1 (z. B.) 1,50 Mio. € (kumuliert 3,00 Mio. €) - Abschreibung (über 10 Perioden) 0,3 Mio. € (10 % von 3,00 Mio. €) Wert der Umweltanlagen Ende P1 2,55 Mio. €
+
+Periode 2: Wert der Umweltanlagen Beginn P1 2,55 Mio. € + Investitionen in Umweltanlagen P1 (z. B.) 1,00 Mio. € (kumuliert 4,00 Mio. €) - Abschreibung (über 10 Perioden) 0,4 Mio. € (10 % von 4,00 Mio. €) Wert der Umweltanlagen Ende P1 3,15 Mio. €
+---
+Bilanzposition "Maschinen"
+Die Bilanzposition "Maschinen" umfasst sowohl die Fertigungs- als auch die Umweltanlagen.
+---
+Einfluss von Entlassung des F&E Personals auf den Technologieindex
+Der Technologieindex sinkt nicht wenn F&E Personal entlassen wird, er steigt nur nicht weiter an.
+---
+Fertigungseinzelkosten
+Fertigungseinzelkosten = Fertigungslöhne/Gehälter + Personalnebenkosten + Pensionsrückstellungen + Nacharbeit/Ausschuss
+
+Hinweise:
+Eingerechnet wird nur das einsetzbare Personal.
+Für Überstunden fallen keine Personalnebenkosten und Pensionsrückstellungen an.
+---
+Gegenseitiger Einfluss von Produktindizes
+Investitionen in die Entwicklung von Copy I-alt führen nicht zu einem automatischen Technologiefortschritt von Copy I-neu. Nach Einführung von Copy I-neu sind die ausgewiesenen Werte für Copy I-alt ohne Bedeutung.
+---
+Gelagerte Produkte
+Eine Erhöhung der Indizes wirkt sich auch auf Produkte auf dem Lager aus.
+---
+Grenze Preissenkungen pro Periode
+Nach Periode 1 dürfen die Preise für alle Produkte und Märkte nur noch um max. 10 % pro Periode gesenkt werden (bezogen auf die jeweilige Währung des Marktes). Neueinführungen sind hiervon nicht betroffen (jedoch nur in der Periode der Neueinführung, anschließend gilt auch hier die entsprechende Grenze von 10 %).
+---
+Herabsetzung der Instandhaltung
+Die verfügbare Kapazität ist variabel und kann beispielsweise durch Investitionen in die Instandhaltung verändert werden. Durch verringerte Investitionen in die Instandhaltung der Maschinen kann die verfügbare Kapazität verringert werden, dies ist allerdings erst in einer späteren Periode möglich und wird in dem entsprechenden Prognosebericht ausdrücklich erwähnt.
+---
+Insolvenz
+Ein Unternehmen gilt dann als insolvent, wenn das Eigenkapital aufgebraucht ist.
+---
+Kostenträgerrechnung
+Die Verrechnung der Gemeinkosten auf die beiden Produkte (Kostenträger) erfolgt nach den folgenden Schlüsseln:
+
+Einkauf/Materiallager -> Materialwert
+
+Verwaltung -> Umsatz
+
+Fertigung -> Fertigungseinzelkosten
+
+Produktentwicklung -> Umsatz
+
+Vertrieb/Fertiglager -> Umsatz
+---
+Langfristiger Kredit
+Der langfristige Kredit geht über 10 Perioden. Da das Unternehmensplanspiel maximal 8 Perioden läuft, wird der Kredit nicht während Ihrer Amtszeit zurückgezahlt.
+---
+Max. Desinvestition von 3 Maschinen
+Es können je Maschinentyp maximal 3 Maschinen pro Periode desinvestiert werden.
+---
+Motivation der Mitarbeiter - Produktivität
+Die Motivation der Mitarbeiter (Teilnehmerbericht Nr. 4) wirkt auf den Produktivitätsindex I in der Folgeperiode in Form des Motivationsindexes (Teilnehmerbericht Nr. 3).
+---
+Personaleinzelkosten bei zwei Produkten
+Erläuterungen zu den Personaleinzelkosten in der Kostenartenrechnung:
+
+Sie stellen je Produkt die Summe aus den Einzelkosten der Kostenstellen Fertigung und Verwaltung dar. Die Einzelkosten der Fertigung verteilen sich auf die Produkte im Verhältnis zum erforderlichen Fertigungspersonal.
+---
+Personalkosten bei Einführung Produkt 2
+Erläuterungen zu den Personalkosten (Einzelkosten) in der Kostenartenrechnung:
+
+Sie stellen je Produkt die Summe aus den Einzelkosten der Kostenstellen Fertigung und Verwaltung dar. Die Einzelkosten der Fertigung verteilen sich auf die Produkte im Verhältnis zum erforderlichen Fertigungspersonal. Das erforderliche Verwaltungspersonal wird je Produkt in Abhängigkeit vom Umsatz ermittelt, wobei für Produkt 1 und Produkt 2 unterschiedliche Tabellen maßgebend sind.
+
+Hinweis: Der Bodensatz Verwaltung wird bei Produkt 1 abgezogen.
+---
+Produktneueinführung
+Die Indizes der neuen Produkte sollten höher sein als die der alten. Ist dies nicht der Fall nimmt der Kunde diesen "Rückschritt" wahr und ein Teil der Kunden kauft ein Konkurrenzprodukt. Es kommt also zu einem Imageschaden und daraus resultierend zu einer Absatzeinbuße. Diese hält die weiteren Perioden an! Die zum Vergleich alt/neu herangezogenen neuen Indizes berechnen sich aus der in der Periode, in welcher die Einführung des neuen Produktes getätigt wird, erreichten Indezies unter Berücksichtigung der in dieser Periode noch getätigten Investitionen in dem jeweiligen Index.
+---
+Produktsortiment
+Das Unternehmen startet mit dem Produkt "Copy I". Die Bezeichnung ändert sich später zu "Copy I-alt", sobald am Produkt "Copy I-neu" entwickelt wird. Bei der Produkteinführung werden die "alten" Kopierer im Lager verschrottet und nur "Copy I-neu" wird am Markt angeboten.
+
+Je nach Spielverlauf ist in späteren Perioden ein Produkt "Copy II" möglich. Dieser kann parallel zu "Copy I" angeboten werden.
+---
+Prozessoptimierung
+Investitionen in Prozessoptimierung müssen einen Schwellenwert (siehe Handbuch) übersteigen. Um die Optimierung beizubehalten muss anschließend regelmäßige investiert werden, da der Index jede Periode leicht fällt.
+
+Falls der Index nach der Investition 1,0 nicht überschritten hat, sinkt dieser jede Periode weiter (es wird 1,0 angezeigt). Nach einer Pause bei den Investitionen müssen die Rückgänge erst wieder aufgeholt werden.
+---
+Überstundenzuschläge
+Der Überstundenzuschlag bezieht sich nicht nur auf die personellen Überstunden, sondern auch auf die maschinellen. Sobald einer von beiden Werten über 100 % liegt, wird er berechnet.
+---
+Wie setzen sich die Abschreibungen in der Kostenrechnung zusammen?
+Die Abschreibungen setzen sich in der Kostenrechnung aus den regelmäßigen Abschreibungen (Gebäude, Fertigungsanlagen und Umwelttechnik) zusammen. Die Sofortabschreibung ist eine außerordentliche Abschreibung, die dementsprechend ein neutraler Aufwand ist und nicht in die Kostenrechnung eingeht.
+---
+Wie setzen sich die Abschreibungen in der GuV zusammen?
+In der GuV muss dies jedoch berücksichtigt werden. Dementsprechend setzt sich der Abschreibungsbetrag folgendermaßen zusammen:
+regelmäßige Abschreibungen+Sofortabschreibung-Schrotterlös=Abschreibung in der GuV
+---
+Wie setzen sich die Abschreibungen beim Cash-Flow zusammen?
+Im Cash-Flow Statement wird der traditionelle Cash Flow berechnet (indirekte Methode), indem zu dem Periodenüberschuss die ausgabenneutralen Aufwendungen hinzuaddiert werden (und die einnahmenneutralen Erträge abgezogen werden). Ausgabenneutrale Aufwendungen sind beispielsweise Abschreibungen und Pensionsrückstellungen, da sie keine Zahlungswirkung haben. Da in der GuV der Abschreibungsbetrag den Schrotterlös enthält und dieser nicht ausgaben- und einnahmenneutral ist, wird dieser bei der Berechnung des Cash-Flow nicht nochmal berücksichtigt.
+Periodenüberschuss/-fehlbetrag+regelmäßige Abschreibungen+Sofortabschreibung+Pensionsrückstellungen=traditioneller Cash-Flow
+---
