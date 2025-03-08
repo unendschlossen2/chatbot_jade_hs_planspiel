@@ -1,6 +1,6 @@
 import torch
 
-# Funktion definiert "device" als  GPU, MPS oder CPU
+# Funktion definiert "device" als GPU, MPS oder CPU
 
 def gpu_load():
     if torch.cuda.is_available():
