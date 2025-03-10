@@ -1,5 +1,7 @@
 ## Installation Guide for running the Chatbot locally
 
+For now this _**ONLY**_ works for _**Version 3**_
+
 ### Prerequisites
 - Python 3.12 or higher
 - Cuda 11.8 or higher (if using GPU)
@@ -32,10 +34,10 @@
 
 5. Login to HuggingFace:
    - Put your HuggingFace token in the function login("Your Token")
-   - then run huggingface_login.py (Version 3 only)
+   - then run huggingface_login.py
 
 
-6. Run Gui_test00.py (Version 3 only)
+6. Run Gui_test00.py
 
 
 7. Input your question in the GUI and press "generate"
