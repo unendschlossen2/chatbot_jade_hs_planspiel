@@ -1,4 +1,4 @@
 from huggingface_hub import login
 
-login("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")
+login("Your Token")
 print("Sucessfully logged in to Hugging Face Hub.")
