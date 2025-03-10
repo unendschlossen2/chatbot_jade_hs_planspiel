@@ -24,7 +24,7 @@
    ```
 4. Open the project in your IDE
     - Ensure that the Python interpreter is set to the version you installed in step 1.
-5. Run huggingface_login.py (Version 3 only)
-   - put your HuggingFace token in the function login("Your Token")
-6. Run Gui_test00.py (Version 3 only)
-7. Input your question in the GUI and press "generate"
+5. Put your HuggingFace token in the function login("Your Token")
+   - run huggingface_login.py (Version 3 only)
+7. Run Gui_test00.py (Version 3 only)
+8. Input your question in the GUI and press "generate"
