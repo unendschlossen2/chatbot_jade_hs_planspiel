@@ -1,6 +1,7 @@
 import string
 import re
 
+
 def lowercase_text(text):
     return text.lower()
 
@@ -21,34 +22,37 @@ def transform_markdown_headings(text):
 
 def transform_markdown_table_to_plaintext(text):
     lines = text.strip().split('\n')
-    index = []
-    i = 0
-
-    for line in lines:
-        if line.startswith("|"):
-            index.append(i)
-        i += 1
-
-    tabellenname = lines[index[0]-1].strip()
-
-    print(index)
-
     if not lines:
         return ""
 
-    header_row = lines[index[0]].strip('|').split('|') # Remove leading/trailing pipes and split
-    data_rows = [line.strip('|').split('|') for line in lines[index[2]:]] # Skip separator line
+    header_row = None
+    data_rows = []
+    in_table = False
+    plaintext_table_lines = [] # Store lines of the plaintext table
 
-    plaintext_table = tabellenname + "\n"
+    for line in lines:
+        stripped_line = line.strip()
+        if stripped_line.startswith("|"):
+            in_table = True # Mark as inside a table once we see a table row
+            row_cells = [cell.strip() for cell in stripped_line.strip('|').split('|')] # Split cells and strip whitespace
+            if header_row is None: # First table row is assumed to be header
+                header_row = row_cells
+            else:
+                data_rows.append(row_cells)# Subsequent rows are data rows
+        elif in_table:
+            in_table = False # Table block ends when a non-table line is encountered (simplified table detection)
 
-    # Header row
-    plaintext_table += "Spalten: " + ", ".join([h.strip() for h in header_row]) + "\n"
 
-    # Data rows
-    for i, row in enumerate(data_rows):
-        plaintext_table += f"Zeile {i+1}: " + ", ".join([cell.strip() for cell in row]) + "\n"
+    if header_row: # Only create table if header row is found
+        plaintext_table_lines.append("Tabelle:") # Generic table name, removed dynamic name extraction for simplicity
+        plaintext_table_lines.append("Spalten: " + ", ".join(header_row))
+        for i, row in enumerate(data_rows[1:]):
+            plaintext_table_lines.append(f"Zeile {i+1}: " + ", ".join(row))
 
-    return plaintext_table
+        return "\n".join(plaintext_table_lines) # Join lines with newlines for final plaintext table
+    else:
+        return text # If no table structure detected, return original text (or empty string if you prefer)
+
 
 def process_text(text):
     text = transform_markdown_table_to_plaintext(text)
