@@ -64,10 +64,10 @@ def process_text(text):
 
 if __name__ == '__main__':
     sample_text = """
-# This is a sample text.
-## This is a subheading
-This is a line with punctuation! And some special characters: @#$%^&*()
-This line has     extra   spaces.
+# TESTÜBERSCHRIFT
+## TESTÜBERSCHRIFT 2SXDSADSA
+Tsadsads-s-s.da.s.ds: @#$%^&*()
+sajdj       as9djas jk as.
 Tabelle der prozesse:
 | Aktiv  | Passiv  |
 |----------|----------|
