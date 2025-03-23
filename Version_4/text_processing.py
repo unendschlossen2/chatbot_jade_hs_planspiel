@@ -5,41 +5,64 @@ import re
 
 chunk_index = 0
 keyword_index = 0
-metadata_topology = list()
+minimum_chunk_chars = 1000
+maximum_chunk_chars = 5000
 
 class Chunk:
 
     def __init__(self):
-        print("New chunk created")
         global chunk_index
         global keyword_index
-        global metadata_topology
         self.text = ""
         self.title = ""
         self.metadata = dict()
         self.chunk_index = chunk_index
         self.keyword_index = keyword_index
-        metadata_topology.append(list())
-        chunk_index += 1
+        print("New chunk created, index:", chunk_index)
         keyword_index = 0
+        chunk_index += 1
 
     def add_text(self, text):
         self.text += text
 
     def add_metadata_header(self, metadata, title_depth=0):
         metadata = metadata.strip('#').strip()
-        print(f"Metadata added to chunk: {self.chunk_index} :-- {((title_depth * 'Sub') + 'Heading')}: {metadata}")
+       # print(f"Metadata added to chunk: {self.chunk_index} :-- {((title_depth * 'Sub') + 'Heading')}: {metadata}")
         self.metadata.update({((title_depth * "Sub") + "Heading-" + str(metadata).split(' ')[0]): metadata})
 
     def add_metadata_bold(self, metadata):
         metadata = metadata.strip('**').strip()
-        print(f"Metadata added to chunk: {self.chunk_index} :-- Keyword: {metadata}")
-        self.metadata.update({"Keyword " + str(self.keyword_index): metadata})
+       # print(f"Metadata added to chunk: {self.chunk_index} :-- Keyword: {metadata}")
+        self.metadata.update({"Keyword-" + str(self.keyword_index): metadata})
         self.keyword_index += 1
 
     def append_chunk(self):
-        chunk_splitter(self)
-        chunks.append(self)
+        if self.read_text_length() > maximum_chunk_chars:
+            new_chunk = chunk_splitter(self)
+            chunks.append(self)
+            new_chunk.append_chunk()
+        else:
+            chunks.append(self)
+
+    def copy_metadata(self, metadata_index):
+        new_metadata = dict()
+        index_reached = False
+        for meta_key, meta_value in self.metadata.items():
+            if meta_key == metadata_index:
+                index_reached = True
+            if index_reached:
+                new_metadata.update({meta_key: meta_value})
+        return new_metadata
+
+    def copy_text(self, split_index):
+        if maximum_chunk_chars> len(self.text[:split_index]) > minimum_chunk_chars:
+            new_text = self.text[split_index:]
+            self.text = self.text[:split_index]
+            print("TEXT SPLIT:", new_text)
+            return new_text
+        else:
+            print("TEXT NOT SPLIT", len(self.text[:split_index]))
+            return ""
 
     def read_text(self):
         return self.text
@@ -50,12 +73,14 @@ class Chunk:
     def read_metadata(self):
         return self.metadata
 
-    def read_metadata_index(self, index):
-        return self.metadata[index]
+    def read_metadata_index(self, key):
+        return self.metadata.get(key)
 
-    def __delete__(self, instance):
+    def __delete__(self):
+        global chunk_index
         print(f"Chunk {self.chunk_index} deleted")
         del self
+        chunk_index -= 1
 
     def __str__(self):
         return f"Text for Chunk: {self.chunk_index}:-- {self.text}, Metadata for Chunk: {self.chunk_index}:-- {self.metadata}"
@@ -63,7 +88,6 @@ class Chunk:
 # noinspection PyUnboundLocalVariable
 def header_logic(text):
     global chunk_index
-    global metadata_topology
     for line in text.splitlines():
         if line.startswith('#'):
             title_depth = -1
@@ -76,52 +100,39 @@ def header_logic(text):
             for x in line:
                 if x == "#":
                     title_depth += 1
-            metadata_topology[current_chunk.chunk_index].append(title_depth)
             current_chunk.add_metadata_header(line, title_depth)
         elif line.startswith('---'):
             current_chunk.append_chunk()
-        current_chunk.add_text(line.strip().strip('#').strip('0123456789'))
+        current_chunk.add_text(line.strip().strip('#').strip('0123456789')+':')
 
 def bold_logic():
-    for chunk_x in chunks:
-        bold_word_collection = re.findall(r'\*\*(.*?)\*\*', chunk_x.text)
+    for current_chunk in chunks:
+        bold_word_collection = re.findall(r'\*\*(.*?)\*\*', current_chunk.read_text())
         if bold_word_collection:
-            print(f"Bold words found in chunk {chunk_x.chunk_index}: {bold_word_collection}")
             for bold_word in bold_word_collection:
-                chunk_x.add_metadata_bold(bold_word)
+                current_chunk.add_metadata_bold(bold_word)
         else:
-            print(f"No bold words found in chunk {chunk_x.chunk_index}")
+            pass
 
 def chunk_splitter(current_chunk):
-    if current_chunk.read_text_length() > 10000:
-        print(f"Chunk {current_chunk.chunk_index} is too long, splitting...")
-        for depth_level in range(0,5):
-            for topology_index in metadata_topology[current_chunk.chunk_index]:
-                if topology_index <= depth_level:
-                    while True:
-                        try:
-                            if topology_index in metadata_topology[current_chunk.chunk_index][metadata_topology[current_chunk.chunk_index].index(topology_index) + 1:]:
-                                heading = list(current_chunk.read_metadata())[metadata_topology[current_chunk.chunk_index].index(topology_index)]
-                                print(f"Splitting chunk {current_chunk.chunk_index} at heading {heading}")
-                                if current_chunk.read_text().find(heading):
-                                    print(f"Trying to split chunk {current_chunk.chunk_index} at heading {heading}")
-                                    new_chunk = Chunk()
-                                    new_chunk.add_text(list(current_chunk.read_text())[list(current_chunk.read_text()).index(current_chunk.read_text().find(heading)):])
-                                    if new_chunk.read_text_length() > 10000:
-                                        print(f"New chunk {new_chunk.chunk_index} is still too long, trying again...")
-                                        new_chunk.__delete__(new_chunk)
-                                        continue
-                                    else:
-                                        print(f"New chunk {new_chunk.chunk_index} created successfully")
-                                        break
-                        except ValueError:
-                            print(f"ValueError: {topology_index} not found in metadata topology")
-                            break
-                        else:
-                            break
-
-                    ##### TODO: Add logic to handle the new chunk and append it to the chunks list with all metadata and text, then split old chunk to contain only the text before the heading
-                    ##### TODO: Add logic so loop stops running after first successful split
+    print(f'Chunk {current_chunk.chunk_index} is too long with {current_chunk.read_text_length()} chars, attempting to split...')
+    for header_level in range(1, 5):
+        possible_splits = [key for key in current_chunk.metadata.keys() if key.startswith('Sub') and key.split('Heading')[0].split('Sub').count('')-1 == header_level]
+        possible_splits.reverse()
+        print(possible_splits)
+        for possible_split in possible_splits:
+            new_chunk = Chunk()
+            new_chunk.metadata = current_chunk.copy_metadata(possible_split)
+            print(current_chunk.read_text())
+            new_chunk.text = current_chunk.copy_text(current_chunk.read_text().find(current_chunk.read_metadata_index(possible_split)))
+            print(new_chunk.read_text())
+            print(current_chunk.read_text_length())
+            if maximum_chunk_chars > current_chunk.read_text_length() > minimum_chunk_chars:
+                print(f"Chunk {current_chunk.chunk_index} is now {current_chunk.read_text_length()} chars long, and {new_chunk.chunk_index} is {new_chunk.read_text_length()} chars long")
+                return new_chunk
+            else:
+                print(f"Chunk {current_chunk.chunk_index} is too long with {current_chunk.read_text_length()}, trying next header level on {header_level}")
+                new_chunk.__delete__()
 
 def process_text(text):
     header_logic(text)
@@ -133,9 +144,12 @@ if __name__ == '__main__':
 
     with open('wiki_Data/Topsim Handbuch Markdown.md', 'r', encoding='utf-8') as file:
         sample_text = file.read()
-
     process_text(sample_text)
+    print(chunks)
+    text_length = 0
     for chunk in chunks:
-        print(chunk.read_metadata())
-        print(chunk.read_text_length())
-    print(metadata_topology)
+        print("chunk index:", chunk.chunk_index)
+        print("chunk länge:", chunk.read_text_length())
+        text_length += chunk.read_text_length()
+    print(f'Original text length: {len(sample_text)}, chunked text length: {text_length}')
+    print(f'Cut text: {''.join(sorted(set(sample_text) - set(''.join(chunk.read_text() for chunk in chunks))))}')
