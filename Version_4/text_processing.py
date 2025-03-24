@@ -1,12 +1,16 @@
-# import string
 import re
 
+'''
+This script processes a markdown file, splitting it into chunks based on headers and bold keywords.
+It creates a list of Chunk objects, each containing text and metadata.
+The script also handles chunk splitting if the text exceeds a certain length.
+'''
 
-
+chunks = []
 chunk_index = 0
 keyword_index = 0
 minimum_chunk_chars = 1000
-maximum_chunk_chars = 5000
+maximum_chunk_chars = 3000
 
 class Chunk:
 
@@ -14,7 +18,6 @@ class Chunk:
         global chunk_index
         global keyword_index
         self.text = ""
-        self.title = ""
         self.metadata = dict()
         self.chunk_index = chunk_index
         self.keyword_index = keyword_index
@@ -85,9 +88,12 @@ class Chunk:
     def __str__(self):
         return f"Text for Chunk: {self.chunk_index}:-- {self.text}, Metadata for Chunk: {self.chunk_index}:-- {self.metadata}"
 
+
 # noinspection PyUnboundLocalVariable
 def header_logic(text):
     global chunk_index
+    table = False
+    table_text = []
     for line in text.splitlines():
         if line.startswith('#'):
             title_depth = -1
@@ -101,9 +107,20 @@ def header_logic(text):
                 if x == "#":
                     title_depth += 1
             current_chunk.add_metadata_header(line, title_depth)
+            if not table:
+                current_chunk.add_text(line.strip().strip('#').strip('0123456789')+':')
+        elif line.startswith('|'):
+            table_text.append(line)
+            table = True
         elif line.startswith('---'):
             current_chunk.append_chunk()
-        current_chunk.add_text(line.strip().strip('#').strip('0123456789')+':')
+        if table and not line.startswith('|'):
+            table = False
+            current_chunk.add_text(parse_table_to_string(table_text))
+            table_text = []
+        if not table and not line.startswith('#') and not line.startswith('---'):
+            current_chunk.add_text(line.strip().strip('#').strip('0123456789')+' ')
+
 
 def bold_logic():
     for current_chunk in chunks:
@@ -111,8 +128,37 @@ def bold_logic():
         if bold_word_collection:
             for bold_word in bold_word_collection:
                 current_chunk.add_metadata_bold(bold_word)
+
+
+def parse_table_to_string(markdown_table):
+    parsed_table_text = 'TABELLE: '
+    lines = markdown_table
+    if len(lines) < 3:
+        print("Table is too short")
+        return
+
+    header = [h.strip() for h in re.split(r'\|', lines[0])[1:-1]]
+    separator = lines[1].strip()
+    if not all(c in ['-', ':', '|', ' '] for c in separator):
+        print("Invalid table separator")
+        return
+
+    data_rows = []
+    for line in lines[2:]:
+        row_data = [d.strip() for d in re.split(r'\|', line)[1:-1]]
+        if len(row_data) == len(header):
+            data_rows.append(row_data)
+
+    output_strings = []
+    for row in data_rows:
+        if len(header) == 2:
+            output_strings.append(f"{header[0]}: {row[0]}, {header[1]}: {row[1]},")
         else:
-            pass
+            output_strings.append(", ".join([f"{header[i]}: {row[i]}" for i in range(len(header))]))
+    parsed_table_text += ', '.join(output_strings)
+
+    return parsed_table_text + ', TABELLENENDE.'
+
 
 def chunk_splitter(current_chunk):
     print(f'Chunk {current_chunk.chunk_index} is too long with {current_chunk.read_text_length()} chars, attempting to split...')
@@ -134,22 +180,24 @@ def chunk_splitter(current_chunk):
                 print(f"Chunk {current_chunk.chunk_index} is too long with {current_chunk.read_text_length()}, trying next header level on {header_level}")
                 new_chunk.__delete__()
 
-def process_text(text):
+
+def process_text():
+    with open('wiki_Data/Topsim Handbuch Markdown.md', 'r', encoding='utf-8') as file:
+        text = file.read()
     header_logic(text)
     bold_logic()
+    return chunks
 
-chunks = []
 
 if __name__ == '__main__':
-
     with open('wiki_Data/Topsim Handbuch Markdown.md', 'r', encoding='utf-8') as file:
         sample_text = file.read()
-    process_text(sample_text)
+    process_text()
     print(chunks)
     text_length = 0
     for chunk in chunks:
         print("chunk index:", chunk.chunk_index)
         print("chunk länge:", chunk.read_text_length())
+        print("chunk text:", chunk.read_text())
         text_length += chunk.read_text_length()
-    print(f'Original text length: {len(sample_text)}, chunked text length: {text_length}')
-    print(f'Cut text: {''.join(sorted(set(sample_text) - set(''.join(chunk.read_text() for chunk in chunks))))}')
+    print(f'Original text length: {len(sample_text)}, chunked text length: {text_length}, "#" count: {sample_text.count("#")}')
