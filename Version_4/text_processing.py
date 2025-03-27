@@ -11,6 +11,7 @@ chunk_index = 0
 keyword_index = 0
 minimum_chunk_chars = 1000
 maximum_chunk_chars = 3000
+filepath = 'wiki_Data/Topsim Handbuch Markdown.md'
 
 class Chunk:
 
@@ -21,9 +22,16 @@ class Chunk:
         self.metadata = dict()
         self.chunk_index = chunk_index
         self.keyword_index = keyword_index
+        self.parent_header = dict()
         print("New chunk created, index:", chunk_index)
         keyword_index = 0
         chunk_index += 1
+
+    def append_parent_header(self, header_key, header_value):
+        self.parent_header[header_key] = header_value
+
+    def read_parent_header(self):
+        return self.parent_header
 
     def add_text(self, text):
         self.text += text
@@ -88,6 +96,11 @@ class Chunk:
     def __str__(self):
         return f"Text for Chunk: {self.chunk_index}:-- {self.text}, Metadata for Chunk: {self.chunk_index}:-- {self.metadata}"
 
+
+def read_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+        return text
 
 # noinspection PyUnboundLocalVariable
 def header_logic(text):
@@ -168,7 +181,8 @@ def chunk_splitter(current_chunk):
         print(possible_splits)
         for possible_split in possible_splits:
             new_chunk = Chunk()
-            new_chunk.metadata = current_chunk.copy_metadata(possible_split)
+            #new_chunk.metadata.update(current_chunk.read_parent_header()) #TODO ADD PARENT HEADER METADATA LOGIC
+            new_chunk.metadata.update(current_chunk.copy_metadata(possible_split))
             print(current_chunk.read_text())
             new_chunk.text = current_chunk.copy_text(current_chunk.read_text().find(current_chunk.read_metadata_index(possible_split)))
             print(new_chunk.read_text())
@@ -182,22 +196,19 @@ def chunk_splitter(current_chunk):
 
 
 def process_text():
-    with open('wiki_Data/Topsim Handbuch Markdown.md', 'r', encoding='utf-8') as file:
-        text = file.read()
-    header_logic(text)
+    header_logic(text=read_file(filepath))
     bold_logic()
     return chunks
 
 
 if __name__ == '__main__':
-    with open('wiki_Data/Topsim Handbuch Markdown.md', 'r', encoding='utf-8') as file:
-        sample_text = file.read()
+    sample_text = read_file(filepath)
     process_text()
     print(chunks)
     text_length = 0
     for chunk in chunks:
         print("chunk index:", chunk.chunk_index)
+        print(chunk.metadata)
         print("chunk länge:", chunk.read_text_length())
-        print("chunk text:", chunk.read_text())
         text_length += chunk.read_text_length()
     print(f'Original text length: {len(sample_text)}, chunked text length: {text_length}, "#" count: {sample_text.count("#")}')
