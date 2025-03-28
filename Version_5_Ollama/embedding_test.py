@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 import chromadb
 import ollama
-from text_processing import process_text
+from text_preprocessing import process_text
 
 # --- Configuration for Ollama ---
 OLLAMA_MODEL = "qwen2.5:7b-instruct-q4_K_M"
