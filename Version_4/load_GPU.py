@@ -1,6 +1,6 @@
 import torch
 
-# defines device as GPU, MPS or CPU
+# defines device as GPU, MPS or CPU --- AMD/ROCm or NVIDIA --- OBSOLETE ---
 
 def gpu_load():
     if torch.cuda.is_available():

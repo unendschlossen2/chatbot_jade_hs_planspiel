@@ -1,6 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
+# --- Load LLM for AMD GPUs --- Torch Version --- OBSOLETE ---
+
 def load_model_amd(llm_name):
     tokenizer = AutoTokenizer.from_pretrained(llm_name)
     try:

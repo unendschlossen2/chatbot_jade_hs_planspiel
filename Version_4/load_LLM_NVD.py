@@ -1,6 +1,8 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 import torch
 
+# --- Load LLM for NVIDIA GPUs --- Torch Version --- OBSOLETE ---
+
 def load_model_nvidia_quantized(llm_name):
     quantization_config_4bit = BitsAndBytesConfig(
         load_in_4bit=True,
