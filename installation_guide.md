@@ -19,7 +19,7 @@ For now this _**ONLY**_ works for _**Version 3**_
 
 2. Install the required libraries:
    ```bash
-   pip install transformers torch chromadb sentence_transformers huggingface_hub
+   pip install transformers torch chromadb sentence_transformers huggingface_hub einops
    ```
 3. Clone the repository:
    ```bash
