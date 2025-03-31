@@ -1,0 +1,10 @@
+# Ignore env
+.env
+
+# Ignore data storage
+pers_storage/
+proc_data/
+raw_data/
+
+# Ignore Python cache files
+*.pyc
