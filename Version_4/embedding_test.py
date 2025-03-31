@@ -107,6 +107,8 @@ except Exception as e:
 
 # --------------------------------
 
+generated_answer = response_obj.get('response')
+
 # --- Output ---
 if generated_answer:
     print(f"\nGenerated Answer (from Ollama lib): {generated_answer}")
