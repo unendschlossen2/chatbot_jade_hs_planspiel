@@ -1,9 +1,0 @@
-pip install sentence-transformers transformers torch bitsandbytes sentencepiece chromadb
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 # Example for CUDA 11.8
-
-https://www.python.org/ftp/python/3.12.6/python-3.12.6-amd64.exe
-
-pip install --upgrade huggingface_hub
-
-from huggingface_hub import login
-login(TOKEN)
