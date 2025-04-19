@@ -1,0 +1,55 @@
+Videokonferenz: Allgemeine Informationen und verfügbare Plattformen
+Angehörige der Jade Hochschule haben Zugang zu den folgenden Videokonferenzsystemen:
+
+Cisco Webex, Zoom Meetings, DFNconf - Konferenzdienst im Deutschen Forschungsnetz (Pexip), DFN Webkonferenzen (Adobe Connect), Microsoft Skype for Business
+
+---
+
+Cisco Webex: Informationen
+
+Die Jade Hochschule stellt Cisco Webex und Cisco Webex Teams zur Verfügung.
+Link zur Anleitung: https://hrz-wiki.jade-hs.de/de/tp/communication/webex/start
+
+---
+
+Zoom Meetings: Informationen
+
+Die Dokumentation zu Zoom finden sie im LMS-Wiki.
+Link zur Anleitung: https://lms-wiki.jade-hs.de/de/webconference/zoom/start
+
+---
+
+DFNconf: Informationen
+
+Mit der DFNconf Plattform können Sie Videokonferenzen mit exzellenten Video- und Audioeigenschaften durchführen.
+
+---
+
+DFNconf: Informationen
+
+Weitere Kennzeichen: Verwendung dedizierter VC-Systeme sowie einfacher webbasierter Zugang, maximal 23 Teilnehmer. Mit der Streaming Option können Vorlesungen und Veranstaltungen für einen größeren Personenkreis übertragen werden.
+
+Das Veranstalterportal erreichen Sie unter diesem Link: https://my.conf.dfn.de
+
+Weitere Informationen sind auf den Seiten des Dienstes nachzulesen: https://www.conf.dfn.de/beschreibung-des-dienstes/
+
+---
+
+DFN Webkonferenzen mit Adobe Connect: Informationen
+
+Wenn Sie Elearning-Veranstaltungen oder Webinare bis zu 200 Teilnehmer planen, dann steht ihnen nach wie vor unser Webkonferenzdienst unter Adobe Connect zur Verfügung.
+
+---
+
+Microsoft Skype for Business: Informationen
+Die Jade Hochschule stellt keine Microsoft Skype for Business Zugänge bereit. Sie können aber jederzeit zu Meetings eingeladen werden:
+
+1: Sie erhalten vom Organisator der Konferenz einen Termin oder eine E-Mail mit einem Einladungslink.
+2: Bitte überprüfen Sie ob diese E-Mail korrekt ist (z.B.mit dem Absender verabredet) und klicken Sie auf den Link.
+3: Bei erstmaliger Nutzung wählen Sie auf der Begrüßungsseite den Link „Laden Sie Skype for Business herunter und installieren Sie es.“ aus.
+4: Haben Sie Skype for Business bereits installiert wählen Sie „Bereits installiert? Klicken Sie hier, um mithilfe von Skype for Business teilzunehmen.“ aus.
+5: Daraufhin wird der Skype for Business Client gestartet. Tragen Sie Ihren Namen ein und klicken Sie dann auf das Feld „als Gast teilnehmen“
+6: Sie befinden sich anschließend im virtuellen Wartebereich
+7: Sobald Sie sich in der Konferenz befinden können Sie Ihre Kamera aktivieren, indem Sie auf das Kamerasymbol klicken und die Auswahl bestätigen.
+
+---
