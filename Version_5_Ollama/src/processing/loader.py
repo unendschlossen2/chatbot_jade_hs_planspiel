@@ -65,12 +65,11 @@ LOADER_MAPPING: Dict[str, LoaderFunction] = {
 
 # --- Haupt-Ladefunktion ---
 
-def load_document(file_type, file_path: str) -> Optional[str]:
+def load_document(file_path: str) -> Optional[str]:
     """
     Lädt den Textinhalt aus einer unterstützten Datei basierend auf ihrer Endung.
 
     Args:
-        file_type (str): Der Typ der Datei (z.B. "PDF", "Markdown", "Text").
         file_path (str): Der Pfad zur Datei.
 
     Returns:
@@ -78,9 +77,10 @@ def load_document(file_type, file_path: str) -> Optional[str]:
                        oder nicht unterstützten Dateitypen.
 
     Hinweis: Diese Funktion extrahiert nur Text. Inhalte aus Bildern werden ignoriert.
-             Für OCR (Texterkennung in Bildern) wären zusätzliche Bibliotheken und
-             Logik erforderlich.
     """
+
+    file_type = os.path.splitext(file_path)[1].lower()  # Dateityp aus dem Dateipfad extrahieren
+
     try:
         # Extrahiere die Dateiendung und konvertiere sie zu Kleinbuchstaben
         _, file_extension = os.path.splitext(file_path)
@@ -109,27 +109,27 @@ if __name__ == '__main__':
     test_unsupported_path = 'pfad/zu/deinem/test.jpg'
 
     print(f"\n--- Lade PDF: {test_pdf_path} ---")
-    pdf_content = load_document("PDF", test_pdf_path)
+    pdf_content = load_document(test_pdf_path)
     if pdf_content:
         print(f"Erste 500 Zeichen: {pdf_content[:500]}...")
     else:
         print("PDF konnte nicht geladen werden.")
 
     print(f"\n--- Lade Markdown: {test_md_path} ---")
-    md_content = load_document("Markdown", test_md_path)
+    md_content = load_document(test_md_path)
     if md_content:
         print(f"Erste 500 Zeichen: {md_content[:500]}...")
     else:
         print("Markdown konnte nicht geladen werden.")
 
     print(f"\n--- Lade Text: {test_txt_path} ---")
-    txt_content = load_document("Text", test_txt_path)
+    txt_content = load_document(test_txt_path)
     if txt_content:
         print(f"Erste 500 Zeichen: {txt_content[:500]}...")
     else:
         print("Textdatei konnte nicht geladen werden.")
 
     print(f"\n--- Lade nicht unterstützte Datei: {test_unsupported_path} ---")
-    unsupported_content = load_document("Nicht unterstützt!", test_unsupported_path)
+    unsupported_content = load_document(test_unsupported_path)
     if unsupported_content is None:
         print("Nicht unterstützte Datei korrekt als 'None' behandelt.")
